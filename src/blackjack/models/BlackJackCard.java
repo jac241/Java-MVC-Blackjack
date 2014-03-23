@@ -1,6 +1,6 @@
 package blackjack.models;
 
-public class BlackJackCard extends Card{
+public class BlackJackCard extends Card {
 
 	public BlackJackCard(Suit s, int value) {
 		super(s, value);

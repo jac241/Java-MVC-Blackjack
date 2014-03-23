@@ -7,7 +7,6 @@ public class Deck<T extends Card> {
 	private ArrayList<T> cards;
 	private int dealtIndex = 0;
 	
-	//TODO What is this for??
 	public void setDeckOfCards(ArrayList<T> deckOfCards){
 		cards = deckOfCards;
 	}
@@ -29,7 +28,13 @@ public class Deck<T extends Card> {
 	
 	//TODO implement this
 	public T[] dealHand(int numberOfCards){
-		return null;
+		@SuppressWarnings("unchecked")
+		T[] hand = (T[]) new Object[numberOfCards];
+		for (int i = 0; i < numberOfCards; i++) {
+			hand[i] = cards.get(dealtIndex);
+			dealtIndex++;
+		}
+		return hand;
 	}
 	
 	public T dealCard(){

@@ -1,0 +1,38 @@
+package blackjack.models;
+
+
+public class BlackJackDealer extends Dealer implements Player {
+	
+	private BlackJackHand hand;
+	
+	public BlackJackDealer(Deck<Card> d) {
+		super(d);
+	}
+
+	@Override
+	public void hit(Dealer d) {
+		// TODO Auto-generated method stub
+		takeCard(deck.dealCard());
+	}
+
+	@Override
+	public void stand() {
+		
+	}
+
+	@Override
+	public void takeCard(Card c) {
+		hand.addCard((BlackJackCard) c);
+	}
+
+	@Override
+	public boolean canHit() {
+		boolean canHit = false;
+		if(hand.score() < 17 && !hand.busted() && !hand.is21()){
+			canHit = true;
+		}
+		return canHit;	
+	}
+
+
+}
