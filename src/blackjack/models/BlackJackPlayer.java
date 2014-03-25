@@ -4,6 +4,10 @@ public class BlackJackPlayer implements Player {
 	
 	private BlackJackHand hand;
 	
+	public BlackJackPlayer(){
+		hand = new BlackJackHand();
+	}
+	
 	@Override
 	public void hit(Dealer d) {
 		takeCard(d.dealCard());
