@@ -26,9 +26,9 @@ public class BlackJackGame implements CardGame {
 	public void initializeGame(int numberOfPlayers) {
 		Deck<Card> gameDeck = generateDeck();
 		//add user player
-		addPlayer(new BlackJackPlayer(true));
+		addPlayer(new BlackJackPlayer(PlayerType.USER));
 		for(int i = 0; i < numberOfPlayers - 1; i++){
-			addPlayer(new BlackJackPlayer(false));
+			addPlayer(new BlackJackPlayer(PlayerType.CPU));
 		}
 		setDealer(new BlackJackDealer(gameDeck));
 	}
@@ -36,7 +36,9 @@ public class BlackJackGame implements CardGame {
 	@Override
 	public void quitGame() {
 		// TODO Auto-generated method stub
-
+		players.clear();
+		dealer = null;
+		currentPlayer = null;
 	}
 
 	@Override
@@ -73,6 +75,22 @@ public class BlackJackGame implements CardGame {
 		}
 		d.setDeckOfCards(cards);
 		return d;
+	}
+
+	public Player getCurrentPlayer() {
+		return currentPlayer;
+	}
+
+	public void setCurrentPlayer(Player currentPlayer) {
+		this.currentPlayer = currentPlayer;
+	}
+
+	public ArrayList<Player> getPlayers() {
+		return players;
+	}
+
+	public BlackJackDealer getDealer() {
+		return dealer;
 	}
 	
 

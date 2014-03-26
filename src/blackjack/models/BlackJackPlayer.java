@@ -3,17 +3,16 @@ package blackjack.models;
 public class BlackJackPlayer implements Player {
 	
 	private BlackJackHand hand;
-	private boolean isUser;
+	private PlayerType playerType;
 	
-	public BlackJackPlayer(boolean isUser){
+	public BlackJackPlayer(PlayerType pt){
 		hand = new BlackJackHand();
-		this.isUser = isUser;
+		playerType = pt;
 	}
 	
 	@Override
 	public void hit(Dealer d) {
 		takeCard(d.dealCard());
-
 	}
 
 	@Override
@@ -33,6 +32,10 @@ public class BlackJackPlayer implements Player {
 			canHit = true;
 		}
 		return canHit;
+	}
+
+	public PlayerType getPlayerType() {
+		return playerType;
 	}
 
 }
