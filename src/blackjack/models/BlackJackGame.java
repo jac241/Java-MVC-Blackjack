@@ -5,7 +5,8 @@ import java.util.ArrayList;
 public class BlackJackGame implements CardGame {
 	
 	private ArrayList<Player> players;
-	private Dealer dealer;
+	private BlackJackDealer dealer;
+	private Player currentPlayer;
 	
 	public BlackJackGame(){
 		players = new ArrayList<Player>();
@@ -18,14 +19,16 @@ public class BlackJackGame implements CardGame {
 
 	@Override
 	public void setDealer(Dealer d) {
-		dealer = d;
+		dealer = (BlackJackDealer) d;
 	}
 
 	@Override
 	public void initializeGame(int numberOfPlayers) {
-		Deck gameDeck = generateDeck();
-		for(int i = 0; i < numberOfPlayers; i++){
-			addPlayer(new BlackJackPlayer());
+		Deck<Card> gameDeck = generateDeck();
+		//add user player
+		addPlayer(new BlackJackPlayer(true));
+		for(int i = 0; i < numberOfPlayers - 1; i++){
+			addPlayer(new BlackJackPlayer(false));
 		}
 		setDealer(new BlackJackDealer(gameDeck));
 	}
@@ -38,13 +41,38 @@ public class BlackJackGame implements CardGame {
 
 	@Override
 	public void startGame() {
-		// TODO Auto-generated method stub
+		BlackJackCard c;
+		for(Player p : players){
+			c = (BlackJackCard) dealer.dealCard();
+			c.setFaceUp();
+			p.takeCard(c);			
+		}
+		c = (BlackJackCard) dealer.dealCard();
+		c.setFaceUp();
+		dealer.takeCard(c);
+		for(Player p : players){
+			c = (BlackJackCard) dealer.dealCard();
+			c.setFaceUp();
+			p.takeCard(c);			
+		}
+		c = (BlackJackCard) dealer.dealCard();
+		c.setFaceDown();
+		dealer.takeCard(c);
 		
+		currentPlayer = players.get(0);
 	}
 	
-	// TODO implement this.
-	public Deck generateDeck(){
-		return null;
+	public Deck<Card> generateDeck(){
+		Deck<Card> d = new Deck<>();
+		ArrayList<Card> cards = new ArrayList<>();
+		for(int value = 1; value <= 13; value++){
+			cards.add(new BlackJackCard(Suit.CLUB, value));
+			cards.add(new BlackJackCard(Suit.HEART, value));
+			cards.add(new BlackJackCard(Suit.SPADE, value));
+			cards.add(new BlackJackCard(Suit.DIAMOND, value));
+		}
+		d.setDeckOfCards(cards);
+		return d;
 	}
 	
 

@@ -3,9 +3,11 @@ package blackjack.models;
 public class BlackJackPlayer implements Player {
 	
 	private BlackJackHand hand;
+	private boolean isUser;
 	
-	public BlackJackPlayer(){
+	public BlackJackPlayer(boolean isUser){
 		hand = new BlackJackHand();
+		this.isUser = isUser;
 	}
 	
 	@Override
