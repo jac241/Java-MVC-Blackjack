@@ -37,5 +37,9 @@ public class BlackJackPlayer implements Player {
 	public PlayerType getPlayerType() {
 		return playerType;
 	}
+	
+	public BlackJackHand getHand(){
+		return hand;
+	}
 
 }

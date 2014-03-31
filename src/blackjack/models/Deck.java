@@ -26,7 +26,6 @@ public class Deck<T extends Card> {
 		return cards.size() - dealtIndex;
 	}
 	
-	//TODO implement this
 	public T[] dealHand(int numberOfCards){
 		@SuppressWarnings("unchecked")
 		T[] hand = (T[]) new Object[numberOfCards];
@@ -39,8 +38,7 @@ public class Deck<T extends Card> {
 	
 	public T dealCard(){
 		T c = cards.get(dealtIndex);
-		dealtIndex++;
-		
+		dealtIndex++;		
 		return c;
 	}
 }

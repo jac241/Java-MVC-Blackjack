@@ -2,14 +2,16 @@ package blackjack.models;
 
 import java.util.ArrayList;
 
-public class BlackJackGame implements CardGame {
+public class BlackJackModel implements CardGame {
 	
 	private ArrayList<Player> players;
 	private BlackJackDealer dealer;
 	private Player currentPlayer;
+	private int currentPlayerIndex;
 	
-	public BlackJackGame(){
+	public BlackJackModel(){
 		players = new ArrayList<Player>();
+		initializeGame(1);
 	}
 	
 	@Override
@@ -30,7 +32,9 @@ public class BlackJackGame implements CardGame {
 		for(int i = 0; i < numberOfPlayers - 1; i++){
 			addPlayer(new BlackJackPlayer(PlayerType.CPU));
 		}
-		setDealer(new BlackJackDealer(gameDeck));
+		dealer = new BlackJackDealer(gameDeck);
+		//addPlayer(dealer);
+		currentPlayerIndex = 0;
 	}
 
 	@Override
@@ -74,6 +78,7 @@ public class BlackJackGame implements CardGame {
 			cards.add(new BlackJackCard(Suit.DIAMOND, value));
 		}
 		d.setDeckOfCards(cards);
+		d.shuffle();
 		return d;
 	}
 
@@ -81,7 +86,7 @@ public class BlackJackGame implements CardGame {
 		return currentPlayer;
 	}
 
-	public void setCurrentPlayer(Player currentPlayer) {
+	public void setCurrentPlayer(BlackJackPlayer currentPlayer) {
 		this.currentPlayer = currentPlayer;
 	}
 
@@ -93,5 +98,32 @@ public class BlackJackGame implements CardGame {
 		return dealer;
 	}
 	
+	public void update(String command){
+		if (command.equals("exit")) {
+			System.exit(0);
+		}		
+		if(currentPlayer.equals(dealer)){
+			if (dealer.canHit()){
+				dealer.hit(dealer);
+			}
+		}
+		else if (currentPlayer.getPlayerType() != PlayerType.USER){
+			// TODO Implement multiplyaer  
+		}
+		else {
+			if (command.equals("hit") && currentPlayer.canHit()){
+				currentPlayer.hit(dealer);
+			}
+			else if (command.equals("stand")){
+				currentPlayer.stand();
+			}
+		}
+		currentPlayer = getNextPlayer();
+	}
+	
+	private Player getNextPlayer(){
+		int nextPlayerIndex = (currentPlayerIndex + 1) % players.size();
+		return players.get(nextPlayerIndex);
+	}
 
 }

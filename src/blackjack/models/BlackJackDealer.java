@@ -4,9 +4,11 @@ package blackjack.models;
 public class BlackJackDealer extends Dealer implements Player {
 	
 	private BlackJackHand hand;
+	private PlayerType playerType = PlayerType.CPU;
 	
 	public BlackJackDealer(Deck<Card> d) {
 		super(d);
+		hand = new BlackJackHand();
 	}
 
 	@Override
@@ -34,5 +36,12 @@ public class BlackJackDealer extends Dealer implements Player {
 		return canHit;	
 	}
 
+	public BlackJackHand getHand() {
+		return hand;
+	}
+	
+	public PlayerType getPlayerType(){
+		return playerType;
+	}
 
 }

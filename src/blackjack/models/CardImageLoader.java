@@ -8,7 +8,7 @@ import javax.imageio.ImageIO;
 
 public class CardImageLoader {
 	
-	private static final String resourcePath = "../../../resources/";
+	private static final String resourcePath = "../resources/";
 	private static final String imgExtention = ".png";
 	
 	public static BufferedImage loadImage(Suit s, int value){

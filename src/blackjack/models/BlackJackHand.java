@@ -52,4 +52,9 @@ public class BlackJackHand extends Hand<BlackJackCard> {
 	public boolean is21(){
 		return score() == 21;
 	}
+	
+	public ArrayList<BlackJackCard> getCards(){
+		return cards;
+	}
+	
 }

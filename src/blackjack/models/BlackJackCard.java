@@ -1,15 +1,13 @@
 package blackjack.models;
 
-import java.awt.image.BufferedImage;
-
 public class BlackJackCard extends Card implements Facing {
 	
-	private BufferedImage cardImage;
+	private String cardImageLocation;
 	private Face facing;
 	
 	public BlackJackCard(Suit s, int value) {
 		super(s, value);
-		cardImage = CardImageLoader.loadImage(s, value);
+		cardImageLocation = CardImageLoader.getImageLocation(s, value);
 	}
 	
 	public int value(){
@@ -60,13 +58,13 @@ public class BlackJackCard extends Card implements Facing {
 		facing = Face.DOWN;
 	}
 
-	public BufferedImage getCardImage() {
-		return cardImage;
+	public String getCardImageLocation() {
+		return cardImageLocation;
 	}
 
-	public void setCardImage(BufferedImage cardImage) {
-		this.cardImage = cardImage;
-	}
+//	public void setCardImage(BufferedImage cardImage) {
+//		this.cardImage = cardImage;
+//	}
 
 	public Face getFacing() {
 		return facing;
@@ -75,5 +73,4 @@ public class BlackJackCard extends Card implements Facing {
 	public void setFacing(Face facing) {
 		this.facing = facing;
 	}
-	
 }
